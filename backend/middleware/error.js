@@ -1,6 +1,5 @@
 const ErrorHandler = require("../utils/errorhandler");
 
-
 module.exports = (err,req, res, next)=>{
     err.statusCode = err.statusCode || 500;
     err.message = err.message || "Internal Server Error";
@@ -23,13 +22,11 @@ if(err.name === "JsonWebTokenError"){
     err = new ErrorHandler(message,400)
 }
 
-
 // JWT Expire Error
 if(err.name === "TokenExpiredError"){
     const message = `Json Web Token is Expired, try again`;
     err = new ErrorHandler(message,400)
 }
-
 
     res.status(err.statusCode).json({
         success: false,
